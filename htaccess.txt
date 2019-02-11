@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteRule ^([a-zA-Z_-]*)$ index.php?action=$1
+RewriteRule ^([a-zA-Z_-]*)/([0-9]+) index.php?action=$1&id=$2 [L,QSA]
+
+
+*****
+OJO
+
+Este archivo debe ir en el raíz del proyecto junto al index
+se debe llamar .htaccess
+
+Quitar estas líneas de comentario
+*****
