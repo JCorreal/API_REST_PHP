@@ -1,0 +1,42 @@
+CREATE DATABASE ApiRest_DB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `usuarios` (
+  `Usuario_Id` int(4) NOT NULL AUTO_INCREMENT,
+  `Nombres` varchar(50) NOT NULL,
+  `Apellidos` varchar(50) NOT NULL,
+  PRIMARY KEY (`Usuario_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+CREATE PROCEDURE apirest_db.`spr_Listados`(
+IN p_Usuario_Id  int (4))
+BEGIN	
+     IF (p_Usuario_Id <> 0) THEN
+         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+     ELSE                                    
+	          SELECT * FROM USUARIOS;
+     END IF;         
+END;
+
+CREATE PROCEDURE apirest_db.`spr_Listados`(
+IN p_Usuario_Id  int (4))
+BEGIN	
+     IF (p_Usuario_Id <> 0) THEN
+         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+     ELSE                                    
+	          SELECT * FROM USUARIOS;
+     END IF;         
+END;
+
+CREATE PROCEDURE apirest_db.`spr_Listados`(
+IN p_Usuario_Id  int (4))
+BEGIN	
+     IF (p_Usuario_Id <> 0) THEN
+         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+     ELSE                                    
+	          SELECT * FROM USUARIOS;
+     END IF;         
+END;
+
+INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
+INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
+INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
