@@ -4,8 +4,7 @@
  class Controlador  {
     
     protected $iaccesoDatos;
-    public $usuario;
-        
+    
     public function __construct(IAccesodatos $iaccesoDatos)
     {
         $this->iaccesoDatos=new AccesoDatos();

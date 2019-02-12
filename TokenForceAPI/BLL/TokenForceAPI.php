@@ -1,11 +1,9 @@
-<?php // ESte es el servicio Rest como tal, quien recibe las peticiones desde el exterior
+<?php // Este es el servicio Rest como tal, quien recibe las peticiones desde el exterior
      require_once 'Funciones.php';       
      
      
 class TokenForceAPI {
     
-    protected $accesoDatos;
-        
     public function __construct(){}
              
     public function API(){

@@ -1,4 +1,4 @@
-<?php // Esta es una clase transversal, desde donde se instancia el Factory Method y hay algunas validaciones
+<?php // Esta es una clase transversal, desde donde se instancia el Factory Method
      require_once 'BLL/Controlador.php';
      require_once 'BLL/AccesoDatosFactory.php';
      
