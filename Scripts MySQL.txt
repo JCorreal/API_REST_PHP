@@ -7,15 +7,6 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`Usuario_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE PROCEDURE apirest_db.`spr_Listados`(
-IN p_Usuario_Id  int (4))
-BEGIN	
-     IF (p_Usuario_Id <> 0) THEN
-         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
-     ELSE                                    
-	          SELECT * FROM USUARIOS;
-     END IF;         
-END;
 
 CREATE PROCEDURE apirest_db.`spr_Listados`(
 IN p_Usuario_Id  int (4))
@@ -27,15 +18,69 @@ BEGIN
      END IF;         
 END;
 
-CREATE PROCEDURE apirest_db.`spr_Listados`(
-IN p_Usuario_Id  int (4))
-BEGIN	
-     IF (p_Usuario_Id <> 0) THEN
-         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
-     ELSE                                    
-	          SELECT * FROM USUARIOS;
-     END IF;         
+CREATE PROCEDURE apirest_db.`spr_IUUsuarios`(
+IN  p_Usuario_Id 	INT (4),
+IN  p_Nombres 		varchar(50),
+IN  p_Apellidos	  varchar(50),
+OUT p_Resultado   tinyint(1))
+BEGIN       
+      DECLARE v_DatoExiste tinyint(1) DEFAULT 0;
+      
+      DECLARE exit HANDLER
+      FOR SQLEXCEPTION
+      BEGIN
+           SET p_RESULTADO = -1;           
+           ROLLBACK;
+      END;
+      
+     SET p_Resultado = 0;     
+     
+     IF (p_Usuario_Id = 0) THEN
+         START TRANSACTION;
+         INSERT INTO USUARIOS(NOMBRES,APELLIDOS) VALUES(p_Nombres, p_Apellidos);
+         COMMIT;
+     ELSE
+         SELECT COUNT(*) INTO v_DatoExiste FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+         IF (v_DatoExiste > 0) THEN
+             START TRANSACTION;
+             UPDATE USUARIOS SET             
+             NOMBRES	        = p_Nombres,  
+             APELLIDOS        = p_Apellidos
+             WHERE USUARIO_ID = p_Usuario_Id;
+             COMMIT;
+         ELSE
+             SET p_RESULTADO = -2; 
+         END IF;
+     END IF;    
+       
 END;
+
+CREATE PROCEDURE apirest_db.`spr_DUsuario`(
+IN p_Usuario_Id  int(4),
+OUT p_Resultado tinyint(1))
+BEGIN
+      DECLARE v_DatoExiste tinyint(1) DEFAULT 0;
+      
+      DECLARE exit HANDLER
+      FOR SQLEXCEPTION
+      BEGIN
+           SET p_Resultado = -1;           
+           ROLLBACK;
+      END;
+      
+      SET p_Resultado = 0;
+      SELECT COUNT(*) INTO v_DatoExiste FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+      IF (v_DatoExiste > 0) THEN
+          START TRANSACTION;
+          DELETE FROM USUARIOS
+          WHERE USUARIO_ID = p_Usuario_Id; 
+          
+          COMMIT;
+      ELSE          
+           SET p_Resultado = -2;
+      END IF;      
+END;
+
 
 INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
 INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
