@@ -1,4 +1,4 @@
-<?php
+<?php // Clase que representa la estructura en BD para Usuarios
 
 class Usuario implements JsonSerializable
 {

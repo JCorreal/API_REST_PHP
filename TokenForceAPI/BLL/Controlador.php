@@ -1,4 +1,4 @@
-<?php
+<?php // Este es el Controlador Manager general de todo el sistema. Todo tiene que pasar por esta clase
      require_once 'DAL/AccesoDatos.php';       
      
  class Controlador  {
@@ -13,7 +13,7 @@
   
     public function ObtenerListadoUsuarios() 
     {
-       return $this->iaccesoDatos->ListaUsuarios();
+       return $this->iaccesoDatos->ObtenerListadoUsuarios();
     }
     
     public function ObtenerUsuario($DatoBuscar)

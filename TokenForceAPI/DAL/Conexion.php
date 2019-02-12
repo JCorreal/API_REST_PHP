@@ -1,4 +1,4 @@
-<?php
+<?php // Clase que nos devuelve la conexion con el proveedor que se desee
 
 class Conexion {
  

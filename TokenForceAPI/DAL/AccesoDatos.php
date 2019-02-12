@@ -30,7 +30,7 @@ class AccesoDatos implements IAccesodatos{
      }
    }
   
-    public function ListaUsuarios() {
+    public function ObtenerListadoUsuarios() {
      $cn = Conexion::ObtenerConexion();
      $DatoBuscar = 0;
      $ListaUsuarios = array();

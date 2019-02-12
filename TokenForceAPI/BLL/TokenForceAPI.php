@@ -1,4 +1,4 @@
-<?php
+<?php // ESte es el servicio Rest como tal, quien recibe las peticiones desde el exterior
      require_once 'Funciones.php';       
      
      
