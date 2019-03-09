@@ -1,18 +1,16 @@
 <?php
      require_once '../BO/Usuario.php';     
      
-     $url = 'http://localhost:83/TokenForceAPI/usuarios'; 
+     $url = 'http://localhost:83/TokenForceAPI/usuarios/'. filter_input(INPUT_POST, 'itUsuario_id',FILTER_SANITIZE_NUMBER_INT);
      
      if ($_POST['itCampoClave'] == 'R') // R=Read Consultar un Usuario
      {
-         $url = $url. '/' . filter_input(INPUT_POST, 'itUsuario_id',FILTER_SANITIZE_NUMBER_INT); 
          $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");           
      }                  
      elseif ($_POST['itCampoClave'] == 'D') // D=Delete Eliminar un Usuario
      {
-         $url = $url. '/' . filter_input(INPUT_POST, 'itUsuario_id',FILTER_SANITIZE_NUMBER_INT); 
-         $ch = curl_init();
+         $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");       
      }    
      else // Create o Update
@@ -22,8 +20,8 @@
         $usuario->setNombres(filter_input(INPUT_POST, 'itNombres',FILTER_SANITIZE_STRING));
         $usuario->setApellidos(filter_input(INPUT_POST, 'itApellidos',FILTER_SANITIZE_STRING));     
                 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($usuario));          
+        $ch = curl_init('http://localhost:83/TokenForceAPI/usuarios');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($usuario));        
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");             
      }
