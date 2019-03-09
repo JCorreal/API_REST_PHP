@@ -9,3 +9,4 @@ Hecho todo lo anterior crea la BD en MySQL, ahí mismo se adjuntan los scripts d
 
 Para mayor información, te puedes guiar con el archivo en Api Rest PHP.pdf allí está completamente detallada la forma en que debes probar.
 	
+EL servicio Post para creación de usuarios, también lo puedes probar desde un cliente propio, sin recurrir a programa externos, del cual también se adjunta el fuente con su respectia documentación en pdf.
