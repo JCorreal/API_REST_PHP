@@ -6,56 +6,54 @@
     <body>
         <form method="post" action="BLL/Controlador.php">
             <input type="hidden" id="itCampoClave" name="itCampoClave" value="U"/>
-            <div style="align-content: center">
-            <table border="1" >
-                <thead>
-                </thead>
+            
+            <table border="1">
+                
                 <tbody>
                     <tr>
-                        <th>Usuario_id *</th>
-                        <th>        
+                        <td>Usuario_Id *</td>
+                        <td>
                             <input type="text"                       
                                     id="itUsuario_id" 
                                     name="itUsuario_id" 
                                     required="required"
                                     maxLength="5"        
-                                    placeholder="Usuario_Id"/>          
-                           
-                        </th>
+                                    placeholder="Usuario_Id"/> 
+                        </td>
                     </tr>
                     <tr>
-                        <th>Nombres *</th>
-                        <th>        
+                        <td>Nombres *</td>
+                        <td>
+                            
                             <input type="text"                       
                                     id="itNombres" 
                                     name="itNombres" 
                                     required="required"
                                     maxLength="25"        
-                                    placeholder="Nombres del Usuario">          
-                            <input/>
-                        </th>
+                                    placeholder="Nombres del Usuario"/>     
+                        </td>
                     </tr>
                     <tr>
-                        <th>Apellidos *</th>
+                        <td>Apellidos *</td>
                         <td>
                             <input type="text"                        
                                    id="itApellidos"
                                    name="itApellidos"                        
                                    required="required"             
                                    maxLength="25"
-                                   placeholder="Apellidos del Usuario"/>                       
-                          
+                                   placeholder="Apellidos del Usuario"/>   
                         </td>
                     </tr>
                     <tr>
+                   
                         <td>
+                            
                             <input type="submit" value="Enviar"/>
-                        </td>                    
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
-            </div>     
 
         </form>
     </body>
