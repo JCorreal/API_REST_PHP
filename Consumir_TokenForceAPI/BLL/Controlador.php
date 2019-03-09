@@ -23,9 +23,9 @@
         $usuario->setApellidos(filter_input(INPUT_POST, 'itApellidos',FILTER_SANITIZE_STRING));     
                 
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($usuario));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");             
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($usuario));          
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");             
      }
         
      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                     
