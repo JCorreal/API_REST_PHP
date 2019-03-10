@@ -15,13 +15,13 @@ BEGIN
      IF (p_Usuario_Id <> 0) THEN
          SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
      ELSE                                    
-	       SELECT * FROM USUARIOS;
+	 SELECT * FROM USUARIOS;
      END IF;         
 END;
 
 CREATE PROCEDURE apirest_db.spr_IUUsuarios(
-IN  p_Usuario_Id 	INT (4),
-IN  p_Nombres 		varchar(50),
+IN  p_Usuario_Id  int (4),
+IN  p_Nombres 	  varchar(50),
 IN  p_Apellidos	  varchar(50),
 OUT p_Resultado   tinyint(1))
 
@@ -46,7 +46,7 @@ BEGIN
          IF (v_DatoExiste > 0) THEN
              START TRANSACTION;
              UPDATE USUARIOS SET             
-             NOMBRES	        = p_Nombres,  
+             NOMBRES	      = p_Nombres,  
              APELLIDOS        = p_Apellidos
              WHERE USUARIO_ID = p_Usuario_Id;
              COMMIT;
