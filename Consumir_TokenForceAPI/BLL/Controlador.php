@@ -3,12 +3,12 @@
      
      $url = 'http://localhost:83/TokenForceAPI/usuarios/'. filter_input(INPUT_POST, 'itUsuario_id',FILTER_SANITIZE_NUMBER_INT);
      
-     if ($_POST['itCampoClave'] == 'R') // R=Read Consultar un Usuario
+     if ($_POST['itCampoClave'] == 'R') // R = Read Consultar un Usuario
      {
          $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");           
      }                  
-     elseif ($_POST['itCampoClave'] == 'D') // D=Delete Eliminar un Usuario
+     elseif ($_POST['itCampoClave'] == 'D') // D = Delete Eliminar un Usuario
      {
          $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");       
