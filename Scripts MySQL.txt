@@ -1,28 +1,30 @@
 CREATE DATABASE ApiRest_DB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE `usuarios` (
-  `Usuario_Id` int(4) NOT NULL AUTO_INCREMENT,
-  `Nombres` varchar(50) NOT NULL,
-  `Apellidos` varchar(50) NOT NULL,
-  PRIMARY KEY (`Usuario_Id`)
+CREATE TABLE usuarios (
+  Usuario_Id int(4) NOT NULL AUTO_INCREMENT,
+  Nombres    varchar(50) NOT NULL,
+  Apellidos  varchar(50) NOT NULL,
+  PRIMARY KEY (Usuario_Id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE PROCEDURE apirest_db.`spr_Listados`(
+CREATE PROCEDURE apirest_db.spr_Listados(
 IN p_Usuario_Id  int (4))
+
 BEGIN	
      IF (p_Usuario_Id <> 0) THEN
          SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
      ELSE                                    
-	          SELECT * FROM USUARIOS;
+	       SELECT * FROM USUARIOS;
      END IF;         
 END;
 
-CREATE PROCEDURE apirest_db.`spr_IUUsuarios`(
+CREATE PROCEDURE apirest_db.spr_IUUsuarios(
 IN  p_Usuario_Id 	INT (4),
 IN  p_Nombres 		varchar(50),
 IN  p_Apellidos	  varchar(50),
 OUT p_Resultado   tinyint(1))
+
 BEGIN       
       DECLARE v_DatoExiste tinyint(1) DEFAULT 0;
       
@@ -55,9 +57,10 @@ BEGIN
        
 END;
 
-CREATE PROCEDURE apirest_db.`spr_DUsuario`(
+CREATE PROCEDURE apirest_db.spr_DUsuario(
 IN p_Usuario_Id  int(4),
-OUT p_Resultado tinyint(1))
+OUT p_Resultado  tinyint(1))
+
 BEGIN
       DECLARE v_DatoExiste tinyint(1) DEFAULT 0;
       
@@ -73,14 +76,12 @@ BEGIN
       IF (v_DatoExiste > 0) THEN
           START TRANSACTION;
           DELETE FROM USUARIOS
-          WHERE USUARIO_ID = p_Usuario_Id; 
-          
+          WHERE USUARIO_ID = p_Usuario_Id;           
           COMMIT;
       ELSE          
            SET p_Resultado = -2;
       END IF;      
 END;
-
 
 INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
 INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
