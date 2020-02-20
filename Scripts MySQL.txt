@@ -1,27 +1,25 @@
 CREATE DATABASE ApiRest_DB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE usuarios (
-  Usuario_Id int(4) NOT NULL AUTO_INCREMENT,
-  Nombres    varchar(50) NOT NULL,
-  Apellidos  varchar(50) NOT NULL,
-  PRIMARY KEY (Usuario_Id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE tbl_usuarios (
+  Usuario_Id int(4)      NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Llave primaria para la estructura',
+  Nombres    varchar(50) NOT NULL COMMENT 'Son los nombres del usuario',
+  Apellidos  varchar(50) NOT NULL COMMENT 'Son los apellidos del usuario'
+  ) COMMENT = 'Sencilla tabla para almacenar información de usuarios y probar API Rest';
 
-
-CREATE PROCEDURE apirest_db.spr_Listados(
+CREATE PROCEDURE spr_Listados(
 IN p_Usuario_Id  int (4))
 
 BEGIN	
      IF (p_Usuario_Id <> 0) THEN
-         SELECT * FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+         SELECT * FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
      ELSE                                    
-	 SELECT * FROM USUARIOS;
+	       SELECT * FROM TBL_USUARIOS;
      END IF;         
 END;
 
-CREATE PROCEDURE apirest_db.spr_IUUsuarios(
-IN  p_Usuario_Id  int (4),
-IN  p_Nombres 	  varchar(50),
+CREATE PROCEDURE spr_IUUsuarios(
+IN  p_Usuario_Id 	int(4),
+IN  p_Nombres 		varchar(50),
 IN  p_Apellidos	  varchar(50),
 OUT p_Resultado   tinyint(1))
 
@@ -39,26 +37,25 @@ BEGIN
      
      IF (p_Usuario_Id = 0) THEN
          START TRANSACTION;
-         INSERT INTO USUARIOS(NOMBRES,APELLIDOS) VALUES(p_Nombres, p_Apellidos);
+         INSERT INTO TBL_USUARIOS(NOMBRES,APELLIDOS) VALUES(p_Nombres, p_Apellidos);
          COMMIT;
      ELSE
-         SELECT COUNT(*) INTO v_DatoExiste FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
-         IF (v_DatoExiste > 0) THEN
+         SELECT USUARIO_ID INTO v_DatoExiste FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+         IF (v_DatoExiste <> 0) THEN
              START TRANSACTION;
-             UPDATE USUARIOS SET             
-             NOMBRES	      = p_Nombres,  
+             UPDATE TBL_USUARIOS SET             
+             NOMBRES	        = p_Nombres,  
              APELLIDOS        = p_Apellidos
              WHERE USUARIO_ID = p_Usuario_Id;
              COMMIT;
          ELSE
              SET p_RESULTADO = -2; 
          END IF;
-     END IF;    
-       
+     END IF;           
 END;
 
-CREATE PROCEDURE apirest_db.spr_DUsuario(
-IN p_Usuario_Id  int(4),
+CREATE PROCEDURE spr_DUsuario(
+IN  p_Usuario_Id int(4),
 OUT p_Resultado  tinyint(1))
 
 BEGIN
@@ -72,17 +69,19 @@ BEGIN
       END;
       
       SET p_Resultado = 0;
-      SELECT COUNT(*) INTO v_DatoExiste FROM USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
-      IF (v_DatoExiste > 0) THEN
+      SELECT USUARIO_ID INTO v_DatoExiste FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+      IF (v_DatoExiste <> 0) THEN
           START TRANSACTION;
-          DELETE FROM USUARIOS
-          WHERE USUARIO_ID = p_Usuario_Id;           
+          DELETE FROM TBL_USUARIOS
+          WHERE USUARIO_ID = p_Usuario_Id; 
+          
           COMMIT;
       ELSE          
-           SET p_Resultado = -2;
+          SET p_Resultado = -2;
       END IF;      
 END;
 
-INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
-INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
-INSERT INTO USUARIOS (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
+INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
+INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
+INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
+COMMIT;
