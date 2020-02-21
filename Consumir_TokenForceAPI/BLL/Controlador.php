@@ -32,12 +32,12 @@
      
      if ($_POST['itCampoClave'] == 'R')
      {
-         $obj = json_decode($response);
-         echo 'Nombres: ';
-         print $obj->{'nombres'}; 
-         echo '<br><br>';
-         echo 'Apellidos: ';
-         print $obj->{'apellidos'}; 
+         $obj = json_decode($response);         
+         $nombres = $obj->{'nombres'}; 
+         echo "Nombres: <input type='text' value=$nombres>";
+         echo '<br><br>';         
+         $apellidos = $obj->{'apellidos'}; 
+         echo "Apellidos: <input type='text' value=$apellidos>";
      }     
      else
      {
