@@ -32,12 +32,19 @@
      
      if ($_POST['itCampoClave'] == 'R')
      {
-         $obj = json_decode($response);         
-         $nombres = $obj->{'nombres'}; 
-         echo "Nombres: <input type='text' value=$nombres>";
-         echo '<br><br>';         
-         $apellidos = $obj->{'apellidos'}; 
-         echo "Apellidos: <input type='text' value=$apellidos>";
+           $obj = json_decode($response);
+            if ($obj!=NULL)
+            {   
+                $nombres = $obj->{'nombres'};
+                echo "Nombres: <input type='text' value=$nombres>";
+                echo '<br><br>';         
+                $apellidos = $obj->{'apellidos'}; 
+                echo "Apellidos: <input type='text' value=$apellidos>";
+            }
+            else
+            {
+                echo 'Usuario no existe';
+            }
      }     
      else
      {
