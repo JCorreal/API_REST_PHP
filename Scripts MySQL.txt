@@ -11,9 +11,9 @@ IN p_Usuario_Id  int (4))
 
 BEGIN	
      IF (p_Usuario_Id <> 0) THEN
-         SELECT * FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+         SELECT * FROM tbl_usuarios WHERE USUARIO_ID = p_Usuario_Id;
      ELSE                                    
-	       SELECT * FROM TBL_USUARIOS;
+	       SELECT * FROM tbl_usuarios;
      END IF;         
 END;
 
@@ -37,13 +37,13 @@ BEGIN
      
      IF (p_Usuario_Id = 0) THEN
          START TRANSACTION;
-         INSERT INTO TBL_USUARIOS(NOMBRES,APELLIDOS) VALUES(p_Nombres, p_Apellidos);
+         INSERT INTO tbl_usuarios(NOMBRES,APELLIDOS) VALUES(p_Nombres, p_Apellidos);
          COMMIT;
      ELSE
-         SELECT USUARIO_ID INTO v_DatoExiste FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+         SELECT USUARIO_ID INTO v_DatoExiste FROM tbl_usuarios WHERE USUARIO_ID = p_Usuario_Id;
          IF (v_DatoExiste <> 0) THEN
              START TRANSACTION;
-             UPDATE TBL_USUARIOS SET             
+             UPDATE tbl_usuarios SET             
              NOMBRES	        = p_Nombres,  
              APELLIDOS        = p_Apellidos
              WHERE USUARIO_ID = p_Usuario_Id;
@@ -69,10 +69,10 @@ BEGIN
       END;
       
       SET p_Resultado = 0;
-      SELECT USUARIO_ID INTO v_DatoExiste FROM TBL_USUARIOS WHERE USUARIO_ID = p_Usuario_Id;
+      SELECT USUARIO_ID INTO v_DatoExiste FROM tbl_usuarios WHERE USUARIO_ID = p_Usuario_Id;
       IF (v_DatoExiste <> 0) THEN
           START TRANSACTION;
-          DELETE FROM TBL_USUARIOS
+          DELETE FROM tbl_usuarios
           WHERE USUARIO_ID = p_Usuario_Id; 
           
           COMMIT;
@@ -81,7 +81,7 @@ BEGIN
       END IF;      
 END;
 
-INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
-INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
-INSERT INTO TBL_USUARIOS (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
+INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
+INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
+INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
 COMMIT;
