@@ -41,7 +41,7 @@ class TokenForceAPI {
      if ($_GET['action']=='usuarios')
      {
         $controlador = Funciones::CrearControlador(); 
-        $ad = new AccesoDatos();
+         
         if ($DatoBuscar!= NULL) 
         {
          $response = $controlador->ObtenerUsuario($DatoBuscar);             
