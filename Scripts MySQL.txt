@@ -6,6 +6,12 @@ CREATE TABLE tbl_usuarios (
   Apellidos  varchar(50) NOT NULL COMMENT 'Son los apellidos del usuario'
   ) COMMENT = 'Sencilla tabla para almacenar información de usuarios y probar API Rest';
 
+INSERT INTO ApiRest_DB.tbl_usuarios (NOMBRES, APELLIDOS) VALUES 
+('Lebron', 'James'),
+('Stephen', 'Curry'),
+('James', 'Harden');
+COMMIT;
+
 CREATE PROCEDURE spr_Listados(
 IN p_Usuario_Id  int (4))
 
@@ -81,7 +87,4 @@ BEGIN
       END IF;      
 END;
 
-INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('Lebron', 'James');
-INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('Stephen', 'Curry');
-INSERT INTO tbl_usuarios (NOMBRES, APELLIDOS) VALUES ('James', 'Harden');
-COMMIT;
+
